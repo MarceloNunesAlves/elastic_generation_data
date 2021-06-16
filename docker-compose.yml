@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+
+    elasticsearch:
+        image: elasticsearch:7.9.3
+        container_name: elastic
+        environment:
+            - discovery.type=single-node
+        ports:
+            - "9200:9200"
+        networks:
+            - mltest
+        volumes:
+            - elasticdb:/usr/share/elasticsearch/data
+
+    kibana:
+        image: kibana:7.9.3
+        container_name: kibana
+        ports:
+            - "5601:5601"
+        networks:
+            - mltest
+        depends_on:
+            - elasticsearch
+
+networks:
+    mltest:
+        driver: bridge
+
+volumes:
+    elasticdb:
