@@ -57,9 +57,6 @@ def incluirElemento():
         with concurrent.futures.ThreadPoolExecutor() as executor:
             future = executor.submit(historico.TaskHistorico, dados, requisicao['chave'].copy(), intervalo, index,
                                      int(requisicao['historico_em_dias']), amplitude, acumulativo)
-        #thread = historico.TaskHistorico(dados, requisicao['chave'].copy(), intervalo, index,
-        #                                 int(requisicao['historico_em_dias']), amplitude)
-        #thread.start()
 
             if acumulativo:
                 sum_valores = future.result()
@@ -70,7 +67,7 @@ def incluirElemento():
 
 
     jobScheduler.startEvent(dados, intervalo, requisicao['chave'].copy(), amplitude, index, acumulativo, sum_valores)
-    return "Job enviado para o InfluxDB!"
+    return "Job enviado para o elasticsearch!"
 
 
 @app.route('/', methods=['PUT'])

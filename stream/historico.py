@@ -15,7 +15,7 @@ def TaskHistorico(_dados, _json, _intervalo, _index, _historico_em_dias, _amplit
 
             freqCalc = str(_intervalo) + 'S'
 
-            db = data_elastic.ManagerInfluxDB()
+            db = data_elastic.ManagerElastic()
 
             envios = ''
             count = 1
@@ -43,7 +43,7 @@ def TaskHistorico(_dados, _json, _intervalo, _index, _historico_em_dias, _amplit
 
                 count += 1
 
-            db.sendData(envios)
+            db.sendBulkElastic(envios)
 
             print('Fim do processo de geracao do historico...')
 

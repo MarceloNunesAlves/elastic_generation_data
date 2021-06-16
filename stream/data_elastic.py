@@ -22,14 +22,14 @@ url = os.environ.get('URL_ELK', 'localhost:9200')  # export URL_ELK=localhost:92
 user = os.environ.get('USER_ELK')  # export USER_ELK=None
 senha = os.environ.get('PWD_ELK')
 
-class ManagerInfluxDB():
+class ManagerElastic():
 
     def __init__(self):
         self.es = None
-        if(self.user and self.senha):
-            self.es = Elasticsearch(['https://'+ self.url], http_auth=(self.user, self.senha))
+        if(user and senha):
+            self.es = Elasticsearch(['https://'+ url], http_auth=(user, senha))
         else:
-            self.es = Elasticsearch(['http://' + self.url])
+            self.es = Elasticsearch(['http://' + url])
 
     def sendData(self, index, envio):
         try:
@@ -44,10 +44,10 @@ class ManagerInfluxDB():
         headers = httputils.setHeaders("application/x-ndjson")
 
         conn = None
-        if (self.user and self.senha):
-            conn = http.client.HTTPSConnection(self.url)
+        if (user and senha):
+            conn = http.client.HTTPSConnection(url)
         else:
-            conn = http.client.HTTPConnection(self.url)
+            conn = http.client.HTTPConnection(url)
 
         conn.request("POST", "/_bulk", params, headers)
 

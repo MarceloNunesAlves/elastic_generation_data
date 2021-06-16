@@ -1,6 +1,6 @@
 # Geração de dados de series temporais (Elasticsearch)
 
-#Criação do ambiente
+## Criação do ambiente
 
 Para este teste simples é importante que o ambiente do python possua todos os pacotes necessários.
 
@@ -14,6 +14,7 @@ conda activate elastic_env
 conda install python
 pip install elasticsearch
 pip install flask
+pip install pandas
 ```
 
 

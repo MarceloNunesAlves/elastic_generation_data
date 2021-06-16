@@ -43,12 +43,12 @@ class process():
                 valor = valor + self.sum_valores
                 memory_sum_valores[hashutils.gerarHash(json.dumps(self.body))] = valor
 
-            db = data_elastic.ManagerInfluxDB()
+            db = data_elastic.ManagerElastic()
 
             envio = {**self.body, "time": agora.strftime("%Y-%m-%dT%H:%M:%SZ"), "value": valor}
             db.sendData(self.index, envio)
 
-            print('Dado enviado para o InfluxDB -> ', json.dumps(envio))
+            print('Dado enviado para o elasticsearch -> ', json.dumps(envio))
 
 def startEvent(_dados, intervalo, body, amplitude, index, acumulativo, sum_valores):
     threading.Timer(intervalo, startEvent, [_dados, intervalo, body, amplitude,
