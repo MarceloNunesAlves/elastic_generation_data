@@ -33,11 +33,9 @@ class ManagerElastic():
 
     def sendData(self, index, envio):
         try:
-            self._client.write_points(envio, database='data-test', time_precision="m")
             res = self.es.index(index=index, body=envio)
         except Exception as e:
-            if "database not found" in str(e):
-                self._client.create_database('data-test')
+            print('Erro na inserção. {}'.format(str(e)))
 
     def sendBulkElastic(self, envio):
         params = envio
